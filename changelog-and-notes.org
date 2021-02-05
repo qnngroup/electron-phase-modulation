@@ -1,2 +1,10 @@
-* 2021-02-05 -- Initial function implemented for modulation and propagation
+* 2021-02-04 -- Initial function implemented for modulation and propagation
 
+* 2021-02-05 -- Some issues with conversion to real space after modulation
+
+ - I think that the math is more or less correct, but I am having issues that seem to be related to numerical problems.
+ - By playing with the fftshifts I can make it better --> I have seen this kind of behavior before and think it is related to the way the fft algorithm interprets time-shifting.
+ - Need to look through and make sure all fft's are performed in such a way that there is no large phase ramp
+ - Need to also better understand how one can change the settings of the initial pulse to affect the spatial/spectral resolution of the output
+ - On the plus side, the energy calculation is always great -- it totally makes sense -- the problem is only with re-creating the wavefunction amplitude envelope in real-space after propagating for some time after modulation
+   - Even happens at time 0 so that means there has to be an issue with the numerical side of things.  

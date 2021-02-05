@@ -46,7 +46,7 @@ W = (2*pi/T)*fftshift((-1*floor(Nt/2) - mod(Nt, 2)):(floor(Nt/2)-1)) + W0;
 k = sqrt(2*W);
 
 %Calculate the spectral amplitude using ifft:
-a_k = ((k + k0)/(2*sqrt(2*pi))).*ifft(A.*exp(-1j*phi_mod));
+a_k = ((k + k0)/(2*sqrt(2*pi))).*ifft(fftshift(A.*exp(-1j*phi_mod)));
 
 %For the Jacobian
 dk = diff(k);
