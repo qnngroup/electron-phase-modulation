@@ -1,0 +1,19 @@
+/results/*
+/*.mat
+/*.pptx
+/*~
+/*.fig
+
+#Settings should stay local...
+#/sweep_intensity_settings.m
+#/sweep_intensity_and_ground_state_settings.m
+#/sweep_settings.m
+
+#Other auto-generated stuff to not keep
+/*.DS_store
+/octave-workspace
+
+#Files for pushing and pulling
+/git_push.sh
+/git_pull.sh
+DATA
