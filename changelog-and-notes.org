@@ -1,6 +1,7 @@
-* 2021-02-04 -- Initial function implemented for modulation and propagation
 
-* 2021-02-05 -- Some issues with conversion to real space after modulation
+* Notes
+** 2021-02-04 -- Initial function implemented for modulation and propagation
+** 2021-02-05 -- Some issues with conversion to real space after modulation
 
  - I think that the math is more or less correct, but I am having issues that seem to be related to numerical problems.
  - By playing with the fftshifts I can make it better --> I have seen this kind of behavior before and think it is related to the way the fft algorithm interprets time-shifting.
@@ -8,3 +9,26 @@
  - Need to also better understand how one can change the settings of the initial pulse to affect the spatial/spectral resolution of the output
  - On the plus side, the energy calculation is always great -- it totally makes sense -- the problem is only with re-creating the wavefunction amplitude envelope in real-space after propagating for some time after modulation
    - Even happens at time 0 so that means there has to be an issue with the numerical side of things.  
+** 2021-02-06 -- Update on last note (2021-02-05) -- Issues Resolved/Understood
+
+It seems that the changes I made in fft shifting at the end of the day yesterday were sufficient to solve all remaining problems.  
+
+The current test script seems to completely check out and make sense.  
+
+The reason you see some spatial modulation of the wavepacket even at time 0 is that we imparted the modulator as a phase gate in time -- not space.  
+
+This assumption differs from the one in ropers, where they impart the phase modulator as a phase gate in space, not time.  
+
+I think they both are basically two sides of the same problem... and converge when the electron moudlation depth is "perturbative" -- that  is when it is small you don't see the spatial modulations from the time-gate (and likely vice-a-versa if you looked at the effect on the temporal nature of the wavepacket from a spatial phase modulation)...
+
+I think that in the end the approximation I make in this code is more accurate.  Why?  Because the modulator is thin and acts on the wavepacket in time as it passes through.  To think of it as a pure space gate implies that as it passes to the other side, there is no spatial reshaping of the wavepacket.  That likely is not true, but I think the models that I am making here would capture this effect.  
+
+What this model is not accounting for is that the real modulators will not be perfectly thin relative to the wavepacket, and will act as a function of both space and time!!!  So basically, each model has this approximation baked in -- either they act all in space or all in time.  
+
+After testing -- I think it is time to wrap up the scripts for converting back into real-space inside of a function and tidy up the code.  
+* Tasks
+** TODO Real-Space conversion function
+
+Create function to convert wavefunction back to real-space after modulation for each time step.  
+
+Tidy up the remaining test code into a script.

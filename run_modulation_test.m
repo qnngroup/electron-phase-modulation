@@ -2,22 +2,25 @@ clear all;
 
 c = 299.79245 %speed of light in nm/fs
 
-t = linspace(-2500, 2500, 100000);
+t = linspace(-1000, 1000, 100000);
 [A, garbage] = gaussian_pulse(t, 200, 0, 0);
 
 lambda = 1000;
 omega = 2*pi*c/lambda;
 
-V = sin(omega*t);
-%[V, garbage] = gaussian_pulse(t, 200, omega, 0);
-V = 10*V;
+%V = sin(omega*t);
+[V, garbage] = gaussian_pulse(t, 200, omega, 0);
+V = 1*V;
 
-W0 = 15e3;
+W0 = 1e3;
 
 [k, a_k, W, P_W] = calc_energy_spec(t, A, W0, V);
 
 figure(1);
 plot(W, P_W);
+set(gca, 'fontsize', 14);
+xlabel('Electron Energy (eV)', 'fontsize', 14);
+ylabel('Spectral Amplitude (a.u.)', 'fontsize', 14);
 
 % -- Need to build these up as a function of time and space!
 % TODO: Get this commented out and into its own function!
@@ -39,8 +42,14 @@ a_k_lin = fftshift(a_k_lin);
 
 %Now get x in real space
 x = linspace(0, 2*pi*x0/(k(2) - k(1)), length(k_lin));
+x = x - x(end)/2;
 
-t_out = linspace(0, 4000, 100)/t0;
+t_space = x*t0/x0/k0;
+
+t_out = linspace(0, 1000, 100)/t0;
+
+##%Center position of wavepacket window
+x_center = t_out*k0*x0/1000; %in um
 
 for a = 1:length(t_out)
 
@@ -56,12 +65,12 @@ for a = 1:length(t_out)
   u_out(a, :) = fftshift(ifft(a_k_lin.*time_prop.*space_shift));
 
 end
-
-
-
 figure(2);
 %plot(x, abs(u_out).^2)
-imagesc(x, t_out*t0, abs(u_out).^2);
-xlim([x(end)/2 - 500, x(end)/2 + 500]);
+imagesc(x, x_center, abs(u_out).^2);
+set(gca, 'fontsize', 14)
+xlim([-500, 500]);
 shading interp;
-colorbar();
+colorbar('fontsize', 14);
+xlabel('x (nm)', 'fontsize', 14);
+ylabel('Propagation Distance (\mum)', 'fontsize', 14);
