@@ -6,11 +6,13 @@ function [k, a_k, W, P_W] = calc_energy_spec(t, A, W0, V)
 % (2) The oscillating potential energy step due to an oscillating electric field
 %     across the phase plate.
 %
-%It assumes the wwavefunction is defined by a pulsed electron wavepacket
+%It assumes the wavefunction is defined by a pulsed electron wavepacket
 %with a time-domain complex envelope given by A, and central energy E0.
 %The slowly-varying envelope approximation is used throughout for these 
 %calculations. 
 %
+%For convenience, it outputs both an energy spectrum in eV, and the momentum
+%spectrum where the k-vector is in the normalized eV units (see below).  
 %
 % Inputs
 % -------
