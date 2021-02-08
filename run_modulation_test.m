@@ -33,19 +33,48 @@ set(gca, 'fontsize', 14);
 xlabel('Electron Energy (eV)', 'fontsize', 14);
 ylabel('Spectral Amplitude (a.u.)', 'fontsize', 14);
 
+##%Now propagate to t_prime and output the real-space wavefunction:
+##
+##t_prime = linspace(0, 1000, 100);
+##
+##%Propagate...
+##[x_center, x, u_out] = propagate(t_prime, W0, k, a_k);
+##
+##%Plot output wavefunction u_out:
+##figure(2);
+##imagesc(x, x_center/1000, abs(u_out).^2);
+##set(gca, 'fontsize', 14)
+##xlim([-500, 500]);
+##shading interp;
+##colorbar('fontsize', 14);
+##xlabel('x (nm)', 'fontsize', 14);
+##ylabel('Propagation Distance (\mum)', 'fontsize', 14);
 
-%Now propagate to t_prime and output the real-space wavefunction:
-t_prime = linspace(0, 1000, 100);
-
-%Propagate...
+% -- What about de-modulation? 
+physical_constants_normalized;
+k0 = sqrt(2*W0);
+t_prime = 1000;
 [x_center, x, u_out] = propagate(t_prime, W0, k, a_k);
 
-%Plot output wavefunction u_out:
-figure(2);
-imagesc(x, x_center/1000, abs(u_out).^2);
-set(gca, 'fontsize', 14)
-xlim([-500, 500]);
-shading interp;
-colorbar('fontsize', 14);
-xlabel('x (nm)', 'fontsize', 14);
-ylabel('Propagation Distance (\mum)', 'fontsize', 14);
+%Get the new time-domain envelope
+t = -1*t0*fliplr(x/x0/k0);
+A = fliplr(u_out);
+
+phase_dm = linspace(0, 4*pi, 50)
+
+ 
+%Calculate and plot the energy spectrum
+for a = 1:length(phase_dm)
+  
+  V_mag_dm = 1;
+  [V_env_dm, garbage] = gaussian_pulse(t, t_V, omega, phase_dm(a)); %Potential function
+  V_dm = V_mag_dm*V_env_dm; %Construct the actual potential profile
+
+  [k_dm, a_k_dm, W_dm, P_W_dm(a, :)] = calc_energy_spec(t, A, W0, V_dm);
+  
+endfor
+
+
+figure(3);
+imagesc(W_dm, phase_dm, P_W_dm);
+xlim([990, 1010]); 
