@@ -4,15 +4,18 @@ clear all;
 c = 299.79245; %speed of light in nm/fs
 
 %Time axis and wavepacket pulse envelope for electron:
-t = linspace(-1000, 1000, 100000); %Time axis in fs
+t = linspace(-100, 100, 2000); %Time axis in fs
 W0 = 1e3; %Central energy in eV
-t_electron = 200; %FWHM of electron wavepacket in fs
+t_electron = 10; %FWHM of electron wavepacket in fs
 
 %Modulator settings:
 lambda = 1000; %Wavelength in nm
 V_mag = 5; %Modulator potential strength in eV
 t_V = 200; %Duration of modulation function (FWHM in fs)
 
+%Demodulator Settings
+V_mag_dm = 5;
+phase_dm = linspace(0, 8*pi, 100);
 
 %-- Calculations -- 
 
@@ -22,7 +25,7 @@ omega = 2*pi*c/lambda;
 V = V_mag*V_env; %Construct the actual potential profile
 
 %Calculate the wavepacket envelope
-[A, garbage] = gaussian_pulse(t, 200, 0, 0);
+[A, garbage] = gaussian_pulse(t, t_electron, 0, 0);
 
 %Calculate and plot the energy spectrum
 [k, a_k, W, P_W] = calc_energy_spec(t, A, W0, V);
@@ -58,13 +61,10 @@ x_center = 5000;
 %t_prime = 1000;
 %x_center = t_prime*k0*x0/t0;
 
-t = linspace(-500, 500, 10000);
+%t = linspace(-100, 100, 10000);
 
 
 [t_center, u_out] = propagate_fixed_frame(x_center, t, W0, k, a_k);
-
-V_mag_dm = 5;
-phase_dm = linspace(0, 4*pi, 50);
 
 for a = 1:length(phase_dm)
   
@@ -76,7 +76,7 @@ for a = 1:length(phase_dm)
 end
 
 figure(3);
-imagesc(W_dm, phase_dm, P_W_dm);
-xlim([950, 1050]); 
+imagesc(phase_dm, W_dm, P_W_dm.');
+ylim([950, 1050]); 
 
 

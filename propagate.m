@@ -67,7 +67,7 @@ for a = 1:length(t_prime)
   space_shift = exp(-1j*k_lin*k0*t_prime(a));
 
   %Phase term that represents propagation in time:
-  W_prop = (k_lin.^2/2);
+  W_prop = (k_lin.^2/2 - W0);
   time_prop = exp(1j*W_prop.*t_prime(a));
   
   
