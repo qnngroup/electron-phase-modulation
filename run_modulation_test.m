@@ -50,6 +50,11 @@ ylabel('Spectral Amplitude (a.u.)', 'fontsize', 14);
 ##xlabel('x (nm)', 'fontsize', 14);
 ##ylabel('Propagation Distance (\mum)', 'fontsize', 14);
 
+
+%PROBLEM: Somehow the time-axis below is stretched incorrectly... I don't know 
+%to get it stretched back correctly.  I need to think through how it has been
+%converted to this point...
+
 % -- What about de-modulation? 
 physical_constants_normalized;
 k0 = sqrt(2*W0);
