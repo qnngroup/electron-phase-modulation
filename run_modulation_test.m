@@ -10,7 +10,7 @@ t_electron = 200; %FWHM of electron wavepacket in fs
 
 %Modulator settings:
 lambda = 1000; %Wavelength in nm
-V_mag = 1; %Modulator potential strength in eV
+V_mag = 5; %Modulator potential strength in eV
 t_V = 200; %Duration of modulation function (FWHM in fs)
 
 
@@ -33,53 +33,50 @@ set(gca, 'fontsize', 14);
 xlabel('Electron Energy (eV)', 'fontsize', 14);
 ylabel('Spectral Amplitude (a.u.)', 'fontsize', 14);
 
-##%Now propagate to t_prime and output the real-space wavefunction:
-##
-##t_prime = linspace(0, 1000, 100);
-##
-##%Propagate...
-##[x_center, x, u_out] = propagate(t_prime, W0, k, a_k);
-##
-##%Plot output wavefunction u_out:
-##figure(2);
-##imagesc(x, x_center/1000, abs(u_out).^2);
-##set(gca, 'fontsize', 14)
-##xlim([-500, 500]);
-##shading interp;
-##colorbar('fontsize', 14);
-##xlabel('x (nm)', 'fontsize', 14);
-##ylabel('Propagation Distance (\mum)', 'fontsize', 14);
+%Now propagate to t_prime and output the real-space wavefunction:
 
+t_prime = linspace(0, 1000, 100);
 
-%PROBLEM: Somehow the time-axis below is stretched incorrectly... I don't know 
-%to get it stretched back correctly.  I need to think through how it has been
-%converted to this point...
+%Propagate...
+[x_center, x, u_out] = propagate(t_prime, W0, k, a_k);
+
+%Plot output wavefunction u_out:
+figure(2);
+imagesc(x, x_center/1000, abs(u_out).^2);
+set(gca, 'fontsize', 14)
+xlim([-500, 500]);
+shading interp;
+colorbar('fontsize', 14);
+xlabel('x (nm)', 'fontsize', 14);
+ylabel('Propagation Distance (\mum)', 'fontsize', 14);
 
 % -- What about de-modulation? 
 physical_constants_normalized;
+
 k0 = sqrt(2*W0);
-t_prime = 1000;
-[x_center, x, u_out] = propagate(t_prime, W0, k, a_k);
+x_center = 5000;
+%t_prime = 1000;
+%x_center = t_prime*k0*x0/t0;
 
-%Get the new time-domain envelope
-t = -1*t0*fliplr(x/x0/k0);
-A = fliplr(u_out);
+t = linspace(-500, 500, 10000);
 
-phase_dm = linspace(0, 4*pi, 50)
 
- 
-%Calculate and plot the energy spectrum
+[t_center, u_out] = propagate_fixed_frame(x_center, t, W0, k, a_k);
+
+V_mag_dm = 5;
+phase_dm = linspace(0, 4*pi, 50);
+
 for a = 1:length(phase_dm)
   
-  V_mag_dm = 1;
   [V_env_dm, garbage] = gaussian_pulse(t, t_V, omega, phase_dm(a)); %Potential function
   V_dm = V_mag_dm*V_env_dm; %Construct the actual potential profile
-
-  [k_dm, a_k_dm, W_dm, P_W_dm(a, :)] = calc_energy_spec(t, A, W0, V_dm);
   
-endfor
+  [k_dm, a_k_dm, W_dm, P_W_dm(a, :)] = calc_energy_spec(t, u_out, W0, V_dm);
 
+end
 
 figure(3);
 imagesc(W_dm, phase_dm, P_W_dm);
-xlim([990, 1010]); 
+xlim([950, 1050]); 
+
+
