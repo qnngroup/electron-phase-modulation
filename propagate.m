@@ -54,7 +54,7 @@ a_k_lin = fftshift(a_k_lin);
 x = linspace(0, 2*pi*x0/(k(2) - k(1)), length(k_lin));
 x = x - x(end)/2;
 
-##%Center position of wavepacket window
+%Center position of wavepacket window
 x_center = t_prime*k0*x0; %in nm
 
 %Run through each point in t_prime and build up u_out matrix.
