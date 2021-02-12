@@ -37,7 +37,6 @@ xlabel('Electron Energy (eV)', 'fontsize', 14);
 ylabel('Spectral Amplitude (a.u.)', 'fontsize', 14);
 
 %Now propagate to t_prime and output the real-space wavefunction:
-
 t_prime = linspace(0, 1000, 100);
 
 %Propagate...
