@@ -1,4 +1,4 @@
-function [x_center, x, u_out] = propagate(t_prime, W0, k, a_k)
+function [x_center, x, u_out] = propagate_fixed_time(t_prime, W0, k, a_k)
 %function [x, u_out] = propagate(x_center, k, a_k)
 %
 %Propagates the wavefunction defined by k and a_k forward to time t_prime.  It

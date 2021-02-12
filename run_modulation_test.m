@@ -41,7 +41,7 @@ ylabel('Spectral Amplitude (a.u.)', 'fontsize', 14);
 t_prime = linspace(0, 1000, 100);
 
 %Propagate...
-[x_center, x, u_out] = propagate(t_prime, W0, k, a_k);
+[x_center, x, u_out] = propagate_fixed_time(t_prime, W0, k, a_k);
 
 %Plot output wavefunction u_out:
 figure(2);
@@ -64,7 +64,7 @@ x_center = 5000;
 %t = linspace(-100, 100, 10000);
 
 
-[t_center, u_out] = propagate_fixed_frame(x_center, t, W0, k, a_k);
+[t_center, u_out] = propagate_fixed_space(x_center, t, W0, k, a_k);
 
 for a = 1:length(phase_dm)
   

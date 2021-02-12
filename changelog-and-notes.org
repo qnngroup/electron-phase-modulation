@@ -26,6 +26,14 @@ I think that in the end the approximation I make in this code is more accurate. 
 What this model is not accounting for is that the real modulators will not be perfectly thin relative to the wavepacket, and will act as a function of both space and time!!!  So basically, each model has this approximation baked in -- either they act all in space or all in time.  
 
 After testing -- I think it is time to wrap up the scripts for converting back into real-space inside of a function and tidy up the code.  
+** 2021-02-12 -- Improving naming conventions; Extending demo and theory notes
+
+Been working on theory notes and demonstration in a Jupyter notebook.
+
+During this realized there are better naming conventions for the propagating functions.  It is better to specify if you are propagating to a fixed time, or to a fixed region in space.  This has now been changed.  
+
+
+
 * Tasks
 ** TODO Real-Space conversion function
 

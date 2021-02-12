@@ -1,4 +1,4 @@
-function [t_center, u_out] = propagate_fixed_frame(x_center, t, W0, k, a_k)
+function [t_center, u_out] = propagate_fixed_space(x_center, t, W0, k, a_k)
 %function [t_center, u_out] = propagate(x_center, t, k, a_k)
 %
 %Propagates the wavefunction defined by k and a_k in time until it is centered 
