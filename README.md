@@ -1,6 +1,6 @@
 # Electron Phase Modulator Simulations
 
-These functions and scripts are for simulating optically-driven electron phase modulation.  You can find a description the theory that this code is based on along with demonstration usage in NOTES-AND-DEMOS/electron-phase-modulation-technical-notes-and-demos.ipynb.  
+These functions and scripts are for simulating optically-driven electron phase modulation.  You can find a description the theory that this code is based on along with demonstration usage in [NOTES-AND-DEMOS/electron-phase-modulation-technical-notes-and-demos.ipynb](NOTES-AND-DEMOS/electron-phase-modulation-technical-notes-and-demos.ipynb).  
 
 # Core Functions
 
