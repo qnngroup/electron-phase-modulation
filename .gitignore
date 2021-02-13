@@ -3,6 +3,7 @@
 /*.pptx
 /*~
 /*.fig
+/*.ipynb_checkpoints*
 
 #Settings should stay local...
 #/sweep_intensity_settings.m

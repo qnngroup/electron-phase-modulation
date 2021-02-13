@@ -1,7 +1,7 @@
 function [x_center, x, u_out] = propagate_fixed_time(t_prime, W0, k, a_k)
-%function [x, u_out] = propagate(x_center, k, a_k)
+%function [x_center, x, u_out] = propagate_fixed_time(t_prime, W0, k, a_k)
 %
-%Propagates the wavefunction defined by k and a_k forward to time t_prime.  It
+%Propagates the wavefunction defined by k and a_k  and central energy W0 forward to time t_prime.  It
 %then reconstructs the wavefunction in real-space.  
 %
 %Based on the central energy W0, it reconstructs the wavefunction in the moving

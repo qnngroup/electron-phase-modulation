@@ -1,7 +1,7 @@
 function [t_center, u_out] = propagate_fixed_space(x_center, t, W0, k, a_k)
-%function [t_center, u_out] = propagate(x_center, t, k, a_k)
+%function [t_center, u_out] = propagate_fixed_space(x_center, t, k, a_k)
 %
-%Propagates the wavefunction defined by k and a_k in time until it is centered 
+%Propagates the wavefunction defined by k and a_k with central energy W0 in time until it is centered 
 %around x_center.  It then reconstructs the wavefunction in time at that position. 
 %
 %The output in time is centered such that t=t_center.  This is to 
