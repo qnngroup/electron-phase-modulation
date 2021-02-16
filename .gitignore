@@ -4,7 +4,7 @@
 /*~
 /*.fig
 /*.ipynb_checkpoints*
-/NOTES-AND-EXAMPLES/*.ipynb_checkpoints*
+/NOTES-AND-DEMOS/*.ipynb_checkpoints*
 
 #Settings should stay local...
 #/sweep_intensity_settings.m
